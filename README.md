@@ -4,6 +4,10 @@ This is a form to save the medal winners in the olympics, by sport. The result o
 
 So the form is created for you, the challenge is to actually save the form data and calculate/show the result table.
 
+![Form](https://laraveldaily.com/wp-content/uploads/2021/08/130041250-0d025c08-96c0-4a76-9a38-cd538b1b4151.png)
+
+![Result table](https://laraveldaily.com/wp-content/uploads/2021/08/130041490-06a87b1b-37e8-4eab-9ad9-ac2f75f75da3.png)
+
 The task details:
 
 - You need to fill in two methods in `SportsController` and fill in the data in `show.blade.php` file;
