@@ -8,22 +8,25 @@ use Illuminate\Http\Request;
 
 class SportsController extends Controller
 {
-    public function index()
+    public function create()
     {
         $sports = Sport::all();
         $countries = Country::all();
 
-        return view('sports.index', compact('sports', 'countries'));
+        return view('sports.create', compact('sports', 'countries'));
     }
 
     public function store(Request $request)
     {
-        
+        // Add your code here
+
         return redirect()->route('show');
     }
 
     public function show()
     {
+        // Add your code here
+
         return view('sports.show');
     }
 }

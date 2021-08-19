@@ -18,6 +18,7 @@
                                     <div class="col-md-6">
                                         <select name="first" id="first"
                                                 class="form-control @error('first') is-invalid @enderror">
+                                            <option>-- choose country --</option>
                                             @foreach ($countries as $country)
                                                 <option value="{{ $country->short_code }}">{{ $country->name }}</option>
                                             @endforeach
@@ -36,6 +37,7 @@
                                     <div class="col-md-6">
                                         <select name="second" id="second"
                                                 class="form-control @error('second') is-invalid @enderror">
+                                            <option>-- choose country --</option>
                                             @foreach ($countries as $country)
                                                 <option value="{{ $country->short_code }}">{{ $country->name }}</option>
                                             @endforeach
@@ -54,6 +56,7 @@
                                     <div class="col-md-6">
                                         <select name="third" id="third"
                                                 class="form-control @error('third') is-invalid @enderror">
+                                            <option>-- choose country --</option>
                                             @foreach ($countries as $country)
                                                 <option value="{{ $country->short_code }}">{{ $country->name }}</option>
                                             @endforeach
