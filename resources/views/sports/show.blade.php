@@ -10,44 +10,22 @@
                     <div class="card-body">
                         <table class="table table-striped">
                             <thead>
-                                <tr>
-                                    <th scope="col">Country</th>
-                                    <th scope="col">Gold</th>
-                                    <th scope="col">Silver</th>
-                                    <th scope="col">Bronze</th>
-                                </tr>
+                            <tr>
+                                <th scope="col">Country</th>
+                                <th scope="col">Gold</th>
+                                <th scope="col">Silver</th>
+                                <th scope="col">Bronze</th>
+                            </tr>
                             </thead>
                             <tbody>
+                            @foreach($countries as $country)
                                 <tr>
-                                    <th>United States of America</th>
-                                    <td>39</td>
-                                    <td>41</td>
-                                    <td>33</td>
+                                    <th>{{ $country->name }}</th>
+                                    <td>{{ $country->gold }}</td>
+                                    <td>{{ $country->silver }}</td>
+                                    <td>{{ $country->bronze }}</td>
                                 </tr>
-                                <tr>
-                                    <th>France</th>
-                                    <td>10</td>
-                                    <td>12</td>
-                                    <td>14</td>
-                                </tr>
-                                <tr>
-                                    <th>Germany</th>
-                                    <td>10</td>
-                                    <td>11</td>
-                                    <td>16</td>
-                                </tr>
-                                <tr>
-                                    <th>Poland</th>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr>
-                                    <th>Norway</th>
-                                    <td>4</td>
-                                    <td>2</td>
-                                    <td>2</td>
-                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
