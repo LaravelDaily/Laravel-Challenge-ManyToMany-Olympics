@@ -6,12 +6,8 @@
             <div class="col-md-8">
                 <div>
                     @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+                        <div class="alert alert-danger text-center">
+                            Invalid information
                         </div>
                     @endif
                 </div>
