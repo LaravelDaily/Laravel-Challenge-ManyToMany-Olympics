@@ -5,8 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Results</div>
-
+                    <div class="card-header">Top 5 Results</div>
                     <div class="card-body">
                         <table class="table table-striped">
                             <thead>
@@ -18,36 +17,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>United States of America</th>
-                                    <td>39</td>
-                                    <td>41</td>
-                                    <td>33</td>
-                                </tr>
-                                <tr>
-                                    <th>France</th>
-                                    <td>10</td>
-                                    <td>12</td>
-                                    <td>14</td>
-                                </tr>
-                                <tr>
-                                    <th>Germany</th>
-                                    <td>10</td>
-                                    <td>11</td>
-                                    <td>16</td>
-                                </tr>
-                                <tr>
-                                    <th>Poland</th>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr>
-                                    <th>Norway</th>
-                                    <td>4</td>
-                                    <td>2</td>
-                                    <td>2</td>
-                                </tr>
+                                @forelse ($countries as $country)
+                                    <tr>
+                                        <th>{{ $country->name }}</th>
+                                        <td>{{ $country->gold_count }}</td>
+                                        <td>{{ $country->silver_count }}</td>
+                                        <td>{{ $country->bronze_count }}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="15" class="text-center">No data found</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

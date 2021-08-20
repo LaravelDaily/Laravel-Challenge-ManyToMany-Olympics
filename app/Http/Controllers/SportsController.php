@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sport;
 use App\Models\Country;
-use Illuminate\Http\Request;
+use App\Http\Requests\ScoreCountryRequest;
 
 class SportsController extends Controller
 {
@@ -12,21 +12,29 @@ class SportsController extends Controller
     {
         $sports = Sport::all();
         $countries = Country::all();
-
-        return view('sports.create', compact('sports', 'countries'));
+        $places = ['1st', '2nd', '3rd'];
+        return view('sports.create', compact('sports', 'countries', 'places'));
     }
 
-    public function store(Request $request)
+    public function store(ScoreCountryRequest $request)
     {
-        // Add your code here
-
+        foreach ($request->score as $sportId => $data) {
+            $sport = Sport::findOrFail($sportId);
+            $sport->countries()->attach($data);
+        }
         return redirect()->route('show');
     }
 
     public function show()
     {
-        // Add your code here
+        $countries = Country::query()
+            ->withCountSport()
+            ->orderByDesc('gold_count')
+            ->orderByDesc('silver_count')
+            ->orderByDesc('bronze_count')
+            ->take(5)
+            ->get();
 
-        return view('sports.show');
+        return view('sports.show', compact('countries'));
     }
 }
