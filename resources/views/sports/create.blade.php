@@ -13,14 +13,14 @@
                                 @csrf
 
                                 <div class="form-group row">
-                                    <label for="first" class="col-md-4 col-form-label text-md-right">1st place:</label>
+                                    <label for="1-{{ $sport->id }}" class="col-md-4 col-form-label text-md-right">1st place:</label>
 
                                     <div class="col-md-6">
-                                        <select name="first" id="first"
+                                        <select name="1-{{ $sport->id }}" id="1-{{ $sport->id }}"
                                                 class="form-control @error('first') is-invalid @enderror">
-                                            <option>-- choose country --</option>
+                                            <option value="0">-- choose country --</option>
                                             @foreach ($countries as $country)
-                                                <option value="{{ $country->short_code }}">{{ $country->name }}</option>
+                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('first')
@@ -32,14 +32,14 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="second" class="col-md-4 col-form-label text-md-right">2nd place:</label>
+                                    <label for="2-{{ $sport->id }}" class="col-md-4 col-form-label text-md-right">2nd place:</label>
 
                                     <div class="col-md-6">
-                                        <select name="second" id="second"
+                                        <select name="2-{{ $sport->id }}" id="2-{{ $sport->id }}"
                                                 class="form-control @error('second') is-invalid @enderror">
-                                            <option>-- choose country --</option>
+                                            <option value="0">-- choose country --</option>
                                             @foreach ($countries as $country)
-                                                <option value="{{ $country->short_code }}">{{ $country->name }}</option>
+                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('second')
@@ -51,14 +51,14 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="third" class="col-md-4 col-form-label text-md-right">3rd place:</label>
+                                    <label for="3-{{ $sport->id }}" class="col-md-4 col-form-label text-md-right">3rd place:</label>
 
                                     <div class="col-md-6">
-                                        <select name="third" id="third"
+                                        <select name="3-{{ $sport->id }}" id="3-{{ $sport->id }}"
                                                 class="form-control @error('third') is-invalid @enderror">
-                                            <option>-- choose country --</option>
+                                            <option value="0">-- choose country --</option>
                                             @foreach ($countries as $country)
-                                                <option value="{{ $country->short_code }}">{{ $country->name }}</option>
+                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('third')
