@@ -16,7 +16,7 @@
                                     <label for="first" class="col-md-4 col-form-label text-md-right">1st place:</label>
 
                                     <div class="col-md-6">
-                                        <select name="first" id="first"
+                                        <select name="first[{{ $sport->name }}]" id="first"
                                                 class="form-control @error('first') is-invalid @enderror">
                                             <option>-- choose country --</option>
                                             @foreach ($countries as $country)
@@ -35,7 +35,7 @@
                                     <label for="second" class="col-md-4 col-form-label text-md-right">2nd place:</label>
 
                                     <div class="col-md-6">
-                                        <select name="second" id="second"
+                                        <select name="second[{{ $sport->name }}]" id="second"
                                                 class="form-control @error('second') is-invalid @enderror">
                                             <option>-- choose country --</option>
                                             @foreach ($countries as $country)
@@ -54,7 +54,7 @@
                                     <label for="third" class="col-md-4 col-form-label text-md-right">3rd place:</label>
 
                                     <div class="col-md-6">
-                                        <select name="third" id="third"
+                                        <select name="third[{{ $sport->name }}]" id="third"
                                                 class="form-control @error('third') is-invalid @enderror">
                                             <option>-- choose country --</option>
                                             @foreach ($countries as $country)
