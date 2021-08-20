@@ -53,11 +53,6 @@
                                     messageBox.remove()
                                 }
                             },
-                            createErrorTemplate(message){
-                                return `<span class='invalid-feedback' role='alert'>
-                                            <strong>${message}</strong>
-                                        </span>`
-                            },
                             onChangeCountry(event) {
                                 const bodyRef = $refs.cardBody
                                 const selects = bodyRef.querySelectorAll('div select')
@@ -104,7 +99,6 @@
                                                     id="{{ $medal_name}}-{{ $sport->id }}"
                                                     class="form-control @error($medal_plural_name .'.'. $sport->id) is-invalid @enderror"
                                                     required
-                                                    data-medal-name="{{ $medal_name }}"
                                                     @change="onChangeCountry($event)"
                                                     >
                                                 <option value="">-- choose country --</option>
