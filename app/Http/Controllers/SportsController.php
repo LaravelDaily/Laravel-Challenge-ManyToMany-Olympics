@@ -2,31 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Sport\GetCountryMedalsAction;
 use App\Models\Sport;
 use App\Models\Country;
-use Illuminate\Http\Request;
 
 class SportsController extends Controller
 {
     public function create()
     {
-        $sports = Sport::all();
-        $countries = Country::all();
-
-        return view('sports.create', compact('sports', 'countries'));
+        return view('sports.create')
+            ->with('sports', Sport::query()
+                ->with('countries')
+                ->get());
     }
 
-    public function store(Request $request)
+    public function show(GetCountryMedalsAction $action)
     {
-        // Add your code here
-
-        return redirect()->route('show');
-    }
-
-    public function show()
-    {
-        // Add your code here
-
-        return view('sports.show');
+        return view('sports.show')
+            ->with('countries', $action->handle());
     }
 }
