@@ -31,11 +31,11 @@ class SportsController extends Controller
                 ['values' => $value],
                 [
                     "values"    => "required|array",
-                    "values.*"  => "required|distinct|digits_between:1,3",
+                    "values.*"  => "required|distinct|not_in:0",
                 ],
                 [
-                    'distinct' => 'Same Country Cant Have Same Medal',
-                    "digits_between" => "Please Choose A Medal"
+                    'distinct' => 'Same Country Cant Have Double Medal',
+                    "not_in" => "Please Choose A Medal"
                 ]
             );
 
@@ -61,11 +61,13 @@ class SportsController extends Controller
     public function show()
     {
 
+
         $countries = Country::withCount(['getGold', 'getSilver', 'getBronze'])
             ->orderBy('get_gold_count', 'desc')
             ->orderBy('get_silver_count', 'desc')
             ->orderBy('get_bronze_count', 'desc')
             ->limit(5)->get();
+
 
         return view('sports.show')->with('countries', $countries);
     }
