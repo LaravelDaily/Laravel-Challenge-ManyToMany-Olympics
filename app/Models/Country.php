@@ -11,7 +11,6 @@ class Country extends Model
     use HasFactory, Searchable;
 
     protected $fillable = ['name', 'short_code'];
-    protected $searchCoulumn = ['name'];
 
     public function getId(String $shorCode)
     {
