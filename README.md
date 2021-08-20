@@ -25,7 +25,7 @@ If you don't know how to contribute a PR, here's [my video with instructions](ht
 
 **Important**: I will NOT merge the Pull Request, only comment on it, whether it's correct or not.
 
-With my limited time, I will probably personally review first 10-20 Pull Requests, all the others will still get "karma points" for doing a good job and improving their skills.
+With my limited time, I will probably personally review random 10-20 Pull Requests, all the others will still get "karma points" for doing a good job and improving their skills.
 
 If you have any questions, or suggestions for the future challenges, please open an Issue.
 
