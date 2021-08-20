@@ -43,8 +43,22 @@ class SportsController extends Controller
 
     public function show()
     {
-        // Add your code here
+        $countries = Country::with('sports')->get();
 
-        return view('sports.show');
+        foreach ($countries as $key => $country) {
+            if (count($country->sports)) {
+                $country->setMedalAmount();
+            } else {
+                $countries->forget($key);
+            }
+        }
+
+        $countries = $countries->sortBy([
+            ['first_place_amount', 'desc'],
+            ['second_place_amount', 'desc'],
+            ['third_place_amount', 'desc'],
+        ]);
+
+        return view('sports.show', compact('countries'));
     }
 }

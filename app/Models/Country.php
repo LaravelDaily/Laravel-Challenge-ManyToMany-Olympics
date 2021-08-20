@@ -27,4 +27,30 @@ class Country extends Model
         )
             ->withPivot(['place']);
     }
+
+    /**
+     * Setting medal amount of country
+     *
+     * @return void
+     */
+    public function setMedalAmount(): void
+    {
+        $sports = $this->sports;
+
+        $this->first_place_amount = 0;
+        $this->second_place_amount = 0;
+        $this->third_place_amount = 0;
+
+        foreach ($sports as $sport) {
+            $place = (int)$sport->pivot->place;
+
+            if ($place === 1) {
+                ++$this->first_place_amount;
+            } else if ($place === 2) {
+                ++$this->second_place_amount;
+            } else if ($place === 3) {
+                ++$this->third_place_amount;
+            }
+        }
+    }
 }
