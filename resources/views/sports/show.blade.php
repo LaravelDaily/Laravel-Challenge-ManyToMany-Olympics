@@ -18,36 +18,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($places_by_countries as $places_by_country )
                                 <tr>
-                                    <th>United States of America</th>
-                                    <td>39</td>
-                                    <td>41</td>
-                                    <td>33</td>
+                                    <th>{{$places_by_country->name}}</th>
+                                    <td>{{$places_by_country->gold_count}}</td>
+                                    <td>{{$places_by_country->silver_count}}</td>
+                                    <td>{{$places_by_country->bronze_count}}</td>
                                 </tr>
-                                <tr>
-                                    <th>France</th>
-                                    <td>10</td>
-                                    <td>12</td>
-                                    <td>14</td>
-                                </tr>
-                                <tr>
-                                    <th>Germany</th>
-                                    <td>10</td>
-                                    <td>11</td>
-                                    <td>16</td>
-                                </tr>
-                                <tr>
-                                    <th>Poland</th>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr>
-                                    <th>Norway</th>
-                                    <td>4</td>
-                                    <td>2</td>
-                                    <td>2</td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
