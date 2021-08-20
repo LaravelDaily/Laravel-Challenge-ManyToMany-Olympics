@@ -4,6 +4,17 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                </div>
                 <form method="POST" action="{{ route('store') }}">
                     @foreach ($sports as $sport)
                         <div class="card mb-4">
@@ -12,62 +23,39 @@
                             <div class="card-body">
                                 @csrf
 
-                                <div class="form-group row">
-                                    <label for="first" class="col-md-4 col-form-label text-md-right">1st place:</label>
+                                @foreach($medal_names as $medal_name)
 
-                                    <div class="col-md-6">
-                                        <select name="first" id="first"
-                                                class="form-control @error('first') is-invalid @enderror">
-                                            <option>-- choose country --</option>
-                                            @foreach ($countries as $country)
-                                                <option value="{{ $country->short_code }}">{{ $country->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('first')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
+                                    @php
+                                        $medal_plural_name = \Illuminate\Support\Str::plural($medal_name);
+                                    @endphp
+                                    <div class="form-group row">
+                                        <label for="{{ $medal_name }}-{{ $sport->id }}"
+                                               class="col-md-4 col-form-label text-md-right required">{{ ordinalSuffix($loop->iteration) }}
+                                            place</label>
+
+                                        <div class="col-md-6">
+                                            <select name="{{ $medal_plural_name }}[{{ $sport->id }}]"
+                                                    id="{{ $medal_name}}-{{ $sport->id }}"
+                                                    class="form-control @error($medal_plural_name .'.'. $sport->id) is-invalid @enderror"
+                                                    required>
+                                                <option value="">-- choose country --</option>
+                                                @foreach ($countries as $country)
+                                                    <option value="{{ $country->id }}"
+                                                            @if(optional(old($medal_plural_name))[$sport->id] == $country->id)
+                                                            selected
+                                                            @endif
+                                                    >{{ $country->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error($medal_plural_name .'.'. $sport->id)
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ \Illuminate\Support\Str::of($message)->replace($medal_plural_name . '.' . $loop->parent->iteration, ordinalSuffix($loop->iteration) . ' place') }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="second" class="col-md-4 col-form-label text-md-right">2nd place:</label>
-
-                                    <div class="col-md-6">
-                                        <select name="second" id="second"
-                                                class="form-control @error('second') is-invalid @enderror">
-                                            <option>-- choose country --</option>
-                                            @foreach ($countries as $country)
-                                                <option value="{{ $country->short_code }}">{{ $country->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('second')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="third" class="col-md-4 col-form-label text-md-right">3rd place:</label>
-
-                                    <div class="col-md-6">
-                                        <select name="third" id="third"
-                                                class="form-control @error('third') is-invalid @enderror">
-                                            <option>-- choose country --</option>
-                                            @foreach ($countries as $country)
-                                                <option value="{{ $country->short_code }}">{{ $country->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('third')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
+                                @endforeach
 
                             </div>
                         </div>

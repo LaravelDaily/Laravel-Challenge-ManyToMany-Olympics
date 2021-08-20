@@ -6,3 +6,10 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.required {
+  &:after {
+    content: "*";
+    color: red;
+  }
+}
