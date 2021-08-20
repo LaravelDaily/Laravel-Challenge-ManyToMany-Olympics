@@ -10,4 +10,17 @@ class Country extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'short_code'];
+
+    public function sports()
+    {
+        return $this->belongsToMany(Sport::class)
+            ->using(CountrySport::class)
+            ->withPivot('medal')
+            ->withTimestamps();
+    }
+
+    public function medals()
+    {
+        return $this->hasMany(CountrySport::class, 'country_id', 'id');
+    }
 }
