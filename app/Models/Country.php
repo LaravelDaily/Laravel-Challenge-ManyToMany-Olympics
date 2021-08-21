@@ -24,7 +24,7 @@ class Country extends Model
      */
     public function sports()
     {
-        return $this->belongsToMany(Sport::class, 'country_sport')->withPivot(['type_score']);
+        return $this->belongsToMany(Sport::class)->withPivot(['type_score']);
     }
 
     public function scopeWithCountPlace($query)

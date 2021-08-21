@@ -16,8 +16,8 @@ class CreateCountrySportTable extends Migration
         Schema::create('country_sport', function (Blueprint $table) {
             $table->id();
             $table->integer('type_score');
-            $table->foreignId('sport_id')->constrained('sports')->onDelete('cascade');
-            $table->foreignId('country_id')->constrained('countries')->onDelete('cascade');
+            $table->foreignId('sport_id')->constrained();
+            $table->foreignId('country_id')->constrained();
         });
     }
 
