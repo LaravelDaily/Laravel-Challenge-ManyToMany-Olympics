@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CountriesSeeder::class,
             SportsSeeder::class,
+            FakeData::class,
         ]);
     }
 }
