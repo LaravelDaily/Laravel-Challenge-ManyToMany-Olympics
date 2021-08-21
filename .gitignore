@@ -13,3 +13,8 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/data
+
+docker-compose.yml
+
+.DS_Store

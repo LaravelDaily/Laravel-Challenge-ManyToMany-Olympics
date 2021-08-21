@@ -11,14 +11,42 @@ class SportsController extends Controller
     public function create()
     {
         $sports = Sport::all();
-        $countries = Country::all();
+        $countries = Country::with('sports')->get();
 
         return view('sports.create', compact('sports', 'countries'));
     }
 
     public function store(Request $request)
     {
-        // Add your code here
+        // loop over scores
+        /*
+         *
+         * scores: [
+         *  1 => [ // sport_id
+         *      "first" => "3", // place => country
+         *      "second" => "6",
+         *      "third" => "8"
+         *   ],
+         *   ...
+         * ]
+         */
+
+        foreach ($request['scores'] as $key => $value) {
+            // $key is equivalent to sport_id
+            // $value is an array of [place => country_id]
+
+            // query for the sport object
+            // sync with country_id and place
+            //
+            //  $countryId = $value['first'];
+            //  sport->countries()->sync($countryId, ['place' => 'first']);
+
+            //  $countryId = $value['second'];
+            //  sport->countries()->sync($countryId, ['place' => 'second']);
+
+            //  $countryId = $value['third'];
+            //  sport->countries()->sync($countryId, ['place' => 'third']);
+        }
 
         return redirect()->route('show');
     }
