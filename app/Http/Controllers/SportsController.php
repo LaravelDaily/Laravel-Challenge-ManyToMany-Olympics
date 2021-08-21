@@ -20,6 +20,11 @@ class SportsController extends Controller
     {
         // Add your code here
 
+        foreach ($request['scores'] as $key => $value) {
+            // $key => sports
+            // $value => country, place
+        }
+
         return redirect()->route('show');
     }
 
