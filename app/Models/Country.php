@@ -31,7 +31,6 @@ class Country extends Model
     {
         $places = get_places();
         foreach ($places as $index => $place) {
-
             $query->withCount([
                 'sports as ' . $place['type'] . '_count' => function ($query) use ($index) {
                     $query->where('type_score', ($index + 1));
@@ -41,20 +40,20 @@ class Country extends Model
         return $query;
     }
 
-    public function scopeOrderByCountPlace($query)
+    public function scopeOrderByCountPlace($query, $direction = 'Desc')
     {
         $places = get_places();
-        foreach ($places as $index => $place) {
-            $query->orderByDesc($place['type'] . '_count');
+        foreach ($places as $place) {
+            $query->orderBy($place['type'] . '_count', $direction);
         }
         return $query;
     }
 
-    public function scopeHavingCountPlace($query)
+    public function scopeHavingCountPlace($query, $operator = '<>', $value = 0)
     {
         $places = get_places();
-        foreach ($places as $index => $place) {
-            $query->orhaving($place['type'] . '_count', '<>', 0);
+        foreach ($places as $place) {
+            $query->orhaving($place['type'] . '_count', $operator, $value);
         }
         return $query;
     }
