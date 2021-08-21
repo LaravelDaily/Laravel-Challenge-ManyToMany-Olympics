@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sport;
 use App\Models\Country;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ScoreCountryRequest;
 
 class SportsController extends Controller
@@ -18,9 +19,15 @@ class SportsController extends Controller
 
     public function store(ScoreCountryRequest $request)
     {
-        foreach ($request->score as $sportId => $data) {
-            $sport = Sport::findOrFail($sportId);
-            $sport->countries()->attach($data);
+        try {
+            DB::transaction(function () use ($request) {
+                foreach ($request->score as $sportId => $data) {
+                    $sport = Sport::findOrFail($sportId);
+                    $sport->countries()->attach($data);
+                }
+            });
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors($exception->getMessage());
         }
         return redirect()->route('show');
     }
