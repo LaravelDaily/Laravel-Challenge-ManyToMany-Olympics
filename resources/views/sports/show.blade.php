@@ -9,26 +9,26 @@
                     <div class="card-body">
                         <table class="table table-striped">
                             <thead>
-                                <tr>
-                                    <th scope="col">Country</th>
-                                    <th scope="col">Gold</th>
-                                    <th scope="col">Silver</th>
-                                    <th scope="col">Bronze</th>
-                                </tr>
+                            <tr>
+                                <th scope="col">Country</th>
+                                @foreach ($places as $place)
+                                    <th scope="col">{{ Str::ucfirst($place['type']) }}</th>
+                                @endforeach
+                            </tr>
                             </thead>
                             <tbody>
-                                @forelse ($countries as $country)
-                                    <tr>
-                                        <th>{{ $country->name }}</th>
-                                        <td>{{ $country->gold_count }}</td>
-                                        <td>{{ $country->silver_count }}</td>
-                                        <td>{{ $country->bronze_count }}</td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="15" class="text-center">No data found</td>
-                                    </tr>
-                                @endforelse
+                            @forelse ($countries as $country)
+                                <tr>
+                                    <th>{{ $country->name }}</th>
+                                    @foreach ($places as $place)
+                                        <td>{{ $country->{$place['type'].'_count'} }}</td>
+                                    @endforeach
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="15" class="text-center">No data found</td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>

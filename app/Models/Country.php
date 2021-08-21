@@ -4,38 +4,58 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Country extends Model
 {
     use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = ['name', 'short_code'];
+
     /**
      * The sports that belong to the Sport
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
     public function sports()
     {
         return $this->belongsToMany(Sport::class, 'country_sport')->withPivot(['type_score']);
     }
 
-    public function scopeWithCountSport($query)
+    public function scopeWithCountPlace($query)
     {
-        return $query->withCount([
-            'sports as gold_count' => function ($query) {
-                $query->where('type_score', 1);
-            },
-            'sports as silver_count' => function ($query) {
-                $query->where('type_score', 2);
-            },
-            'sports as bronze_count' => function ($query) {
-                $query->where('type_score', 3);
-            },
-        ]);
+        $places = get_places();
+        foreach ($places as $index => $place) {
+
+            $query->withCount([
+                'sports as ' . $place['type'] . '_count' => function ($query) use ($index) {
+                    $query->where('type_score', ($index + 1));
+                },
+            ]);
+        }
+        return $query;
+    }
+
+    public function scopeOrderByCountPlace($query)
+    {
+        $places = get_places();
+        foreach ($places as $index => $place) {
+            $query->orderByDesc($place['type'] . '_count');
+        }
+        return $query;
+    }
+
+    public function scopeHavingCountPlace($query)
+    {
+        $places = get_places();
+        foreach ($places as $index => $place) {
+            $query->orhaving($place['type'] . '_count', '<>', 0);
+        }
+        return $query;
     }
 }

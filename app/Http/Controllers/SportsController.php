@@ -12,7 +12,7 @@ class SportsController extends Controller
     {
         $sports = Sport::all();
         $countries = Country::all();
-        $places = ['1st', '2nd', '3rd'];
+        $places = get_places();
         return view('sports.create', compact('sports', 'countries', 'places'));
     }
 
@@ -27,14 +27,14 @@ class SportsController extends Controller
 
     public function show()
     {
+        $places = get_places();
         $countries = Country::query()
-            ->withCountSport()
-            ->orderByDesc('gold_count')
-            ->orderByDesc('silver_count')
-            ->orderByDesc('bronze_count')
+            ->withCountPlace()
+            ->orderByCountPlace()
+            ->havingCountPlace()
             ->take(5)
             ->get();
 
-        return view('sports.show', compact('countries'));
+        return view('sports.show', compact('countries', 'places'));
     }
 }
