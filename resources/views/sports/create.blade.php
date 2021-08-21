@@ -16,14 +16,13 @@
                                     <label for="first" class="col-md-4 col-form-label text-md-right">1st place:</label>
 
                                     <div class="col-md-6">
-                                        <select name="scores[{{ $sport->id }}][country]" id="first"
+                                        <select name="scores[{{ $sport->id }}][first]" id="first"
                                                 class="form-control @error('first') is-invalid @enderror">
                                             <option>-- choose country --</option>
                                             @foreach ($countries as $country)
                                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
                                             @endforeach
                                         </select>
-                                        <input hidden name="scores[{{ $sport->id }}][place]" value="first" />
                                         @error('first')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -36,14 +35,13 @@
                                     <label for="second" class="col-md-4 col-form-label text-md-right">2nd place:</label>
 
                                     <div class="col-md-6">
-                                        <select name="scores[{{ $sport->id }}][country]" id="second"
+                                        <select name="scores[{{ $sport->id }}][second]" id="second"
                                                 class="form-control @error('second') is-invalid @enderror">
                                             <option>-- choose country --</option>
                                             @foreach ($countries as $country)
                                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
                                             @endforeach
                                         </select>
-                                        <input hidden name="scores[{{ $sport->id }}][place]" value="second" />
                                         @error('second')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -56,14 +54,13 @@
                                     <label for="third" class="col-md-4 col-form-label text-md-right">3rd place:</label>
 
                                     <div class="col-md-6">
-                                        <select name="scores[{{ $sport->id }}][country]" id="third"
+                                        <select name="scores[{{ $sport->id }}][third]" id="third"
                                                 class="form-control @error('third') is-invalid @enderror">
                                             <option>-- choose country --</option>
                                             @foreach ($countries as $country)
                                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
                                             @endforeach
                                         </select>
-                                        <input hidden name="scores[{{ $sport->id }}][place]" value="third" />
                                         @error('third')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

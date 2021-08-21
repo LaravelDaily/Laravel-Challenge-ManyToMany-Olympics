@@ -16,3 +16,5 @@ yarn-error.log
 /data
 
 docker-compose.yml
+
+.DS_Store

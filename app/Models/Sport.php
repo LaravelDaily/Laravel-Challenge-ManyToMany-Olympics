@@ -10,4 +10,10 @@ class Sport extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    public function countries()
+    {
+        return $this->belongsToMany(Country::class, 'country_sport', 'sport_id', 'country_id')
+            ->withPivot('place');
+    }
 }

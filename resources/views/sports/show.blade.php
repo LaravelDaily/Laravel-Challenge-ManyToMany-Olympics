@@ -19,10 +19,10 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th>United States of America</th>
-                                    <td>39</td>
-                                    <td>41</td>
-                                    <td>33</td>
+                                    <th>United States of America</th> <!-- {{ $country->name }}-->
+                                    <td>39</td> <!-- {{ $country->firstCount }} -->
+                                    <td>41</td> <!-- {{ $country->secondCount }} -->
+                                    <td>33</td> <!-- {{ $country->thirdCount }} -->
                                 </tr>
                                 <tr>
                                     <th>France</th>
