@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sport;
 use App\Models\Country;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use PHPUnit\Framework\Constraint\Count;
 
 class SportsController extends Controller
 {
