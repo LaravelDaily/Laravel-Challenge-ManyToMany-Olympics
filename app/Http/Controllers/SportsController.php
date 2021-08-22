@@ -18,15 +18,21 @@ class SportsController extends Controller
 
     public function store(Request $request)
     {
-        // Add your code here
-
+        $winners = ['first' => $request->first, 'second' => $request->second, 'third' => $request->third];
+        foreach ($winners as $place => $winner) {
+            foreach ($winner as $sportId => $countryId) {
+                $country = Country::find($countryId);
+                $country->medals()->attach($sportId, ['place' => $place]);
+            }
+        }
         return redirect()->route('show');
     }
 
     public function show()
     {
-        // Add your code here
-
-        return view('sports.show');
+        $countries = Country::has('medals')->withCount(['gold', 'silver', 'bronze'])->get()->sortBy(function($country){
+            return $country->gold->count() || $country->silver->count() || $country->bronze->count();
+        });
+        return view('sports.show', ['countries' => $countries]);
     }
 }
