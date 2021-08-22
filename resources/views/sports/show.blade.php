@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Top 5 Results</div>
+                    <div class="card-header">Top {{ $countries->count() }} Results</div>
                     <div class="card-body">
                         <table class="table table-striped">
                             <thead>
