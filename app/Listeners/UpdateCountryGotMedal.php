@@ -28,12 +28,11 @@ class UpdateCountryGotMedal
      */
     public function handle(CountryGotMedalEvent $event)
     {
-        $this->countMedals($event->country->id, $event->medal);
+        $this->countMedals($event->country, $event->medal);
     }
 
-    private function countMedals(int $id, $medal)
-    {
-        $country = Country::find($id);
+    private function countMedals(Country $country, $medal)
+    {        
         switch ($medal) {
             case Medal::GOLD:
                 $country->count_gold += 1;

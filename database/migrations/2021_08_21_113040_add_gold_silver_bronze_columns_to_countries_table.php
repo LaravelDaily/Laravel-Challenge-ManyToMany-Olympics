@@ -28,7 +28,9 @@ class AddGoldSilverBronzeColumnsToCountriesTable extends Migration
     public function down()
     {
         Schema::table('countries', function (Blueprint $table) {
-            //
+            $table->dropColumn("count_gold");
+            $table->dropColumn("count_silver");
+            $table->dropColumn("count_bronze");
         });
     }
 }

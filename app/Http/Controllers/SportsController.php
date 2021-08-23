@@ -25,6 +25,8 @@ class SportsController extends Controller
 
         DB::table('countries_sports')->truncate(); // TO EMPTY THE TABLE BEFORE SUBMITTING THE FORM
 
+        DB::table("countries")->update(["count_gold"=>0,"count_silver"=>0,"count_bronze"=>0]);
+
         
 
         $sports = Sport::all();
@@ -35,6 +37,7 @@ class SportsController extends Controller
             foreach ($request[$sportName] as $rank => $countryID) {
                 $medal = $this->rankToMedal($rank);
                 $country->sports()->attach(id: $countryID, attributes: ["medal" => $medal, "sport_id" => $sportID, "country_id" => $countryID]);
+                $country = Country::find($countryID);
                 event(new CountryGotMedalEvent($country ,$medal));
             }
         } 
