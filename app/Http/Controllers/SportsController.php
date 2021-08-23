@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ResultRequest;
 use App\Models\Sport;
 use App\Models\Country;
-use Illuminate\Http\Request;
 
 class SportsController extends Controller
 {
@@ -16,17 +16,29 @@ class SportsController extends Controller
         return view('sports.create', compact('sports', 'countries'));
     }
 
-    public function store(Request $request)
+    public function store(ResultRequest $request)
     {
-        // Add your code here
+        collect($request->get('results'))
+            ->each(function (array $result) {
+                $sport = Sport::query()->findOrFail($result['sport']);
+                $sport->countries()->syncWithoutDetaching([$result['first'] => ['position' => 1]]);
+                $sport->countries()->syncWithoutDetaching([$result['second'] => ['position' => 2]]);
+                $sport->countries()->syncWithoutDetaching([$result['third'] => ['position' => 3]]);
+            });
 
         return redirect()->route('show');
     }
 
     public function show()
     {
-        // Add your code here
+        $countries = Country::query()
+            ->has('sports')
+            ->withCountGolds()
+            ->withCountSilvers()
+            ->withCountBronzes()
+            ->latest('golds_count')
+            ->get();
 
-        return view('sports.show');
+        return view('sports.show', compact('countries'));
     }
 }

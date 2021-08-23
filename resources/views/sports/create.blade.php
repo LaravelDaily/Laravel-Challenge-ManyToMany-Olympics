@@ -4,26 +4,33 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <div>{{$error}}</div>
+                    @endforeach
+                @endif
+
                 <form method="POST" action="{{ route('store') }}">
-                    @foreach ($sports as $sport)
+                    @foreach ($sports as $key=>$sport)
                         <div class="card mb-4">
                             <div class="card-header">{{ $sport->name }}</div>
 
                             <div class="card-body">
                                 @csrf
 
+                                <input type="hidden" name="results[{{ $key }}][sport]" value="{{ $sport->id }}">
                                 <div class="form-group row">
                                     <label for="first" class="col-md-4 col-form-label text-md-right">1st place:</label>
 
                                     <div class="col-md-6">
-                                        <select name="first" id="first"
+                                        <select name="results[{{ $key }}][first]" id="first"
                                                 class="form-control @error('first') is-invalid @enderror">
                                             <option>-- choose country --</option>
                                             @foreach ($countries as $country)
-                                                <option value="{{ $country->short_code }}">{{ $country->name }}</option>
+                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('first')
+                                        @error("results[$key][first]")
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -35,14 +42,14 @@
                                     <label for="second" class="col-md-4 col-form-label text-md-right">2nd place:</label>
 
                                     <div class="col-md-6">
-                                        <select name="second" id="second"
+                                        <select name="results[{{ $key }}][second]" id="second"
                                                 class="form-control @error('second') is-invalid @enderror">
                                             <option>-- choose country --</option>
                                             @foreach ($countries as $country)
-                                                <option value="{{ $country->short_code }}">{{ $country->name }}</option>
+                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('second')
+                                        @error("results[$key][second]")
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -51,17 +58,17 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="third" class="col-md-4 col-form-label text-md-right">3rd place:</label>
+                                    <label for="results[{{ $key }}][third]" class="col-md-4 col-form-label text-md-right">3rd place:</label>
 
                                     <div class="col-md-6">
-                                        <select name="third" id="third"
+                                        <select name="results[{{ $key }}][third]" id="third"
                                                 class="form-control @error('third') is-invalid @enderror">
                                             <option>-- choose country --</option>
                                             @foreach ($countries as $country)
-                                                <option value="{{ $country->short_code }}">{{ $country->name }}</option>
+                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('third')
+                                        @error("results[$key][third]")
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
