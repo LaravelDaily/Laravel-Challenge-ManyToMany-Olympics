@@ -6,7 +6,12 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Results</div>
-
+                    {{-- @foreach ($countries as $country)
+                    @foreach ($country->countries as $sport)
+                    
+                @endforeach
+                    @endforeach --}}
+                    
                     <div class="card-body">
                         <table class="table table-striped">
                             <thead>
@@ -18,36 +23,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>United States of America</th>
-                                    <td>39</td>
-                                    <td>41</td>
-                                    <td>33</td>
-                                </tr>
-                                <tr>
-                                    <th>France</th>
-                                    <td>10</td>
-                                    <td>12</td>
-                                    <td>14</td>
-                                </tr>
-                                <tr>
-                                    <th>Germany</th>
-                                    <td>10</td>
-                                    <td>11</td>
-                                    <td>16</td>
-                                </tr>
-                                <tr>
-                                    <th>Poland</th>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr>
-                                    <th>Norway</th>
-                                    <td>4</td>
-                                    <td>2</td>
-                                    <td>2</td>
-                                </tr>
+                                @foreach ($countries as $country)
+                                    <tr>
+                                        <td>{{$country->name}}</td>
+                                        <td>{{$country->count_gold}}</td>
+                                        <td>{{$country->count_silver}}</td>
+                                        <td>{{$country->count_bronze}}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

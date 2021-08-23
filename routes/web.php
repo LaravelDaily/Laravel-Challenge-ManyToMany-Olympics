@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+
 
 Route::get('/', [App\Http\Controllers\SportsController::class, 'create'])->name('create');
 Route::post('/sports', [App\Http\Controllers\SportsController::class, 'store'])->name('store');
