@@ -2,31 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\sport\SportStoreRequest;
 use App\Models\Sport;
 use App\Models\Country;
+use App\Services\SportServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SportsController extends Controller
 {
     public function create()
     {
-        $sports = Sport::all();
-        $countries = Country::all();
+        $sports = Sport::get('name')
+            ->map(fn ($item) => $item->name);
+
+        $countries = DB::table('countries')->get(['name', 'short_code']);
 
         return view('sports.create', compact('sports', 'countries'));
     }
 
-    public function store(Request $request)
+    public function store(SportStoreRequest $request)
     {
-        // Add your code here
+        (new SportServiceProvider)->insertRatings($request->validated());
 
         return redirect()->route('show');
     }
 
     public function show()
     {
-        // Add your code here
+        $countries = Country::countMedals()
+            ->orderByMedal()
+            ->take(5)
+            ->get();
 
-        return view('sports.show');
+        return view('sports.show', compact('countries'));
     }
 }
