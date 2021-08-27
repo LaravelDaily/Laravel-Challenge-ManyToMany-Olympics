@@ -23,9 +23,7 @@ class SportsController extends Controller
 
     public function store(ScoreCountryRequest $request)
     {
-        $sports = cache()->rememberForever('sports', function () {
-            return Sport::all();
-        });
+        $sports = cache('sports');
         try {
             DB::transaction(function () use ($request, $sports) {
                 foreach ($request->score as $sportId => $data) {
