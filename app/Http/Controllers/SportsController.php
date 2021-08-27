@@ -23,11 +23,18 @@ class SportsController extends Controller
 
     public function store(ScoreCountryRequest $request)
     {
+        $sports = cache()->rememberForever('sports', function () {
+            return Sport::all();
+        });
         try {
-            DB::transaction(function () use ($request) {
+            DB::transaction(function () use ($request, $sports) {
                 foreach ($request->score as $sportId => $data) {
-                    $sport = Sport::findOrFail($sportId);
-                    $sport->countries()->attach($data);
+                    $sport = $sports->find($sportId);
+                    if ($sport) {
+                        $sport->countries()->attach($data);
+                    } else {
+                        abort(404);
+                    }
                 }
             });
         } catch (\Exception $exception) {
