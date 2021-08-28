@@ -1,3 +1,4 @@
+{{--{{dd($countries)}}--}}
 @extends('layouts.app')
 
 @section('content')
@@ -18,36 +19,18 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @forelse($countries as $country)
                                 <tr>
-                                    <th>United States of America</th>
-                                    <td>39</td>
-                                    <td>41</td>
-                                    <td>33</td>
+                                    <th>{{$country->name}}</th>
+                                    <td>{{$country->first_place_count}}</td>
+                                    <td>{{$country->second_place_count}}</td>
+                                    <td>{{$country->third_place_count}}</td>
                                 </tr>
+                                @empty
                                 <tr>
-                                    <th>France</th>
-                                    <td>10</td>
-                                    <td>12</td>
-                                    <td>14</td>
+                                    <td>Medals do not exist</td>
                                 </tr>
-                                <tr>
-                                    <th>Germany</th>
-                                    <td>10</td>
-                                    <td>11</td>
-                                    <td>16</td>
-                                </tr>
-                                <tr>
-                                    <th>Poland</th>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr>
-                                    <th>Norway</th>
-                                    <td>4</td>
-                                    <td>2</td>
-                                    <td>2</td>
-                                </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
