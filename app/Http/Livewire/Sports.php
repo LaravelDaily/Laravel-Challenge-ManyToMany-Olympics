@@ -9,30 +9,17 @@ class Sports extends Component
 {
     public $sportId;
 
-    public $firstPlace;
-    public $firstPlaceCountries;
+    public $countries;
 
-    public $secondPlace;
-    public $secondPlaceCountries;
-
-    public $thirdPlace;
-    public $thirdPlaceCountries;
+    public $sports = [
+        'first' => null,
+        'second' => null,
+        'third' => null
+    ];
 
     public function mount()
     {
-        $this->firstPlaceCountries = Country::all();
-        $this->secondPlaceCountries = collect();
-        $this->thirdPlaceCountries = collect();
-    }
-
-    public function loadSecondPlaceCountries()
-    {
-        $this->secondPlaceCountries = Country::all()->except($this->firstPlace);
-    }
-
-    public function loadThirdPlaceCountries()
-    {
-        $this->thirdPlaceCountries = Country::all()->except([$this->firstPlace, $this->secondPlace]);
+        $this->countries = Country::all();
     }
 
     public function render()
