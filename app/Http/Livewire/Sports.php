@@ -12,9 +12,9 @@ class Sports extends Component
     public $countries;
 
     public $sports = [
-        'first' => null,
-        'second' => null,
-        'third' => null
+        '1' => null,
+        '2' => null,
+        '3' => null
     ];
 
     public function mount()

@@ -7,7 +7,7 @@
                     class="form-control @error('sports.'.$sportId.'.0') is-invalid @enderror"
                     wire:model="sports.first">
                 <option value="">-- choose country --</option>
-                @foreach ($countries->except([$sports['second'], $sports['third']]) as $country)
+                @foreach ($countries->except([$sports['2'], $sports['3']]) as $country)
                     <option value="{{ $country->id }}"
                             @if (old('sports.'.$sportId.'.0') == $country->id) selected @endif
                     >{{ $country->name }}</option>
@@ -30,7 +30,7 @@
                     class="form-control @error('sports.'.$sportId.'.1') is-invalid @enderror"
                     wire:model="sports.second">
                 <option value="">-- choose country --</option>
-                @foreach ($countries->except([$sports['first'], $sports['third']]) as $country)
+                @foreach ($countries->except([$sports['1'], $sports['3']]) as $country)
                     <option value="{{ $country->id }}"
                             @if (old('sports.'.$sportId.'.1') == $country->id) selected @endif
                     >{{ $country->name }}</option>
@@ -52,7 +52,7 @@
                     class="form-control @error('sports.'.$sportId.'.2') is-invalid @enderror"
                     wire:model="sports.third">
                 <option value="">-- choose country --</option>
-                @foreach ($countries->except([$sports['first'], $sports['second']]) as $country)
+                @foreach ($countries->except([$sports['1'], $sports['2']]) as $country)
                     <option value="{{ $country->id }}"
                             @if (old('sports.'.$sportId.'.2') == $country->id) selected @endif
                     >{{ $country->name }}</option>
