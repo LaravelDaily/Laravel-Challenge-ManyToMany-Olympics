@@ -35,7 +35,18 @@ class SportsController extends Controller
     {
         // Add your code here
 
-        $countries = Country::withCount('medals')->having('medals_count', '>', 0)->get();
+        $countries = Country::withCount('medals')->
+            having('medals_count', '>', 0)
+            ->get()
+            ->sortByDesc(function($country, $key) {
+                return $country->bronzeCount();
+            })
+            ->sortByDesc(function($country, $key) {
+                return $country->silverCount();
+            })
+            ->sortByDesc(function($country, $key) {
+                return $country->goldCount();
+            });
 
         return view('sports.show', compact('countries'));
     }
