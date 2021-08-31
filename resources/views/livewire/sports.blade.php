@@ -5,7 +5,7 @@
         <div class="col-md-6">
             <select name="sports[{{ $sportId }}][0]" id="first"
                     class="form-control @error('sports.'.$sportId.'.0') is-invalid @enderror"
-                    wire:model="sports.first">
+                    wire:model="sports.1">
                 <option value="">-- choose country --</option>
                 @foreach ($countries->except([$sports['2'], $sports['3']]) as $country)
                     <option value="{{ $country->id }}"
@@ -28,7 +28,7 @@
         <div class="col-md-6">
             <select name="sports[{{ $sportId }}][1]" id="second"
                     class="form-control @error('sports.'.$sportId.'.1') is-invalid @enderror"
-                    wire:model="sports.second">
+                    wire:model="sports.2">
                 <option value="">-- choose country --</option>
                 @foreach ($countries->except([$sports['1'], $sports['3']]) as $country)
                     <option value="{{ $country->id }}"
@@ -50,7 +50,7 @@
         <div class="col-md-6">
             <select name="sports[{{ $sportId }}][2]" id="third"
                     class="form-control @error('sports.'.$sportId.'.2') is-invalid @enderror"
-                    wire:model="sports.third">
+                    wire:model="sports.3">
                 <option value="">-- choose country --</option>
                 @foreach ($countries->except([$sports['1'], $sports['2']]) as $country)
                     <option value="{{ $country->id }}"
