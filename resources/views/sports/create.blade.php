@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+    <?php
+    dump($errors);
+    if ($errors)
+        dump($errors->all());
+    ?>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -13,17 +18,18 @@
                                 @csrf
 
                                 <div class="form-group row">
-                                    <label for="first" class="col-md-4 col-form-label text-md-right">1st place:</label>
+                                    <label for="gold" class="col-md-4 col-form-label text-md-right">1st place:</label>
 
                                     <div class="col-md-6">
-                                        <select name="first" id="first"
-                                                class="form-control @error('first') is-invalid @enderror">
-                                            <option>-- choose country --</option>
+                                        <select name="medals[{{$sport->id}}][gold]" id="gold"
+                                                class="form-control @error("medals.$sport->id.gold") is-invalid
+                                            @enderror">
+                                            <option value="">-- choose country --</option>
                                             @foreach ($countries as $country)
-                                                <option value="{{ $country->short_code }}">{{ $country->name }}</option>
+                                                <option value="{{ $country->id }}" {{ (old("medals.$sport->id.gold") == $country->id ? "selected":"") }}>{{ $country->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('first')
+                                        @error("medals.$sport->id.gold")
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -32,17 +38,17 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="second" class="col-md-4 col-form-label text-md-right">2nd place:</label>
+                                    <label for="silver" class="col-md-4 col-form-label text-md-right">2nd place:</label>
 
                                     <div class="col-md-6">
-                                        <select name="second" id="second"
-                                                class="form-control @error('second') is-invalid @enderror">
-                                            <option>-- choose country --</option>
+                                        <select name="medals[{{$sport->id}}][silver]" id="silver"
+                                                class="form-control @error("medals.$sport->id.silver") is-invalid @enderror">
+                                            <option value="">-- choose country --</option>
                                             @foreach ($countries as $country)
-                                                <option value="{{ $country->short_code }}">{{ $country->name }}</option>
+                                                <option value="{{ $country->id }}" {{ (old("medals.$sport->id.silver") == $country->id ? "selected":"") }}>{{ $country->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('second')
+                                        @error("medals.$sport->id.silver")
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -51,17 +57,18 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="third" class="col-md-4 col-form-label text-md-right">3rd place:</label>
+                                    <label for="bronze" class="col-md-4 col-form-label text-md-right">3rd place:</label>
 
                                     <div class="col-md-6">
-                                        <select name="third" id="third"
-                                                class="form-control @error('third') is-invalid @enderror">
-                                            <option>-- choose country --</option>
+                                        <select name="medals[{{$sport->id}}][bronze]" id="bronze"
+                                                class="form-control @error("medals.$sport->id.bronze") is-invalid
+                                            @enderror">
+                                            <option value="">-- choose country --</option>
                                             @foreach ($countries as $country)
-                                                <option value="{{ $country->short_code }}">{{ $country->name }}</option>
+                                                <option value="{{ $country->id }}" {{ (old("medals.$sport->id.bronze") == $country->id ? "selected":"") }} >{{ $country->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('third')
+                                        @error("medals.$sport->id.bronze")
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
