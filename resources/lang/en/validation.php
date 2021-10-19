@@ -136,8 +136,17 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'medals.*.gold' => [
+            'required' => 'The gold field is required.',
+            'distinct' => 'The gold field has a duplicate value.',
+        ],
+        'medals.*.silver' => [
+            'required' => 'The silver field is required.',
+            'distinct' => 'The silver field has a duplicate value.',
+        ],
+        'medals.*.bronze' => [
+            'required' => 'The bronze field is required.',
+            'distinct' => 'The bronze field has a duplicate value.',
         ],
     ],
 
@@ -152,6 +161,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'medals.*.gold' => 'gold',
+        'medals.*.silver' => 'silver',
+        'medals.*.bronze' => 'bronze'
+    ],
 
 ];

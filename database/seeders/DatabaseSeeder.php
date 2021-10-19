@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CountriesSeeder::class,
             SportsSeeder::class,
+            MedalSeeder::class,
+            CountrySportMedalSeeder::class,
         ]);
     }
 }
