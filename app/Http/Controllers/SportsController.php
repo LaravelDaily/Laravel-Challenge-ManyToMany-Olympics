@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\CurrentMedalAction;
 use App\Models\Sport;
 use App\Models\Country;
 use Illuminate\Http\Request;
@@ -26,9 +27,9 @@ class SportsController extends Controller
 
             $sport = Sport::with('countries')->findOrFail($sport_id);
             $sport->countries()->syncWithoutDetaching([
-                $rank[0] => ['gold' => $sport->countries->where('id', $rank[0])->first()?->pivot->gold + 1],
-                $rank[1] => ['silver' => $sport->countries->where('id', $rank[1])->first()?->pivot->gold + 1],
-                $rank[2] => ['bronze' => $sport->countries->where('id', $rank[2])->first()?->pivot->gold + 1],
+                $rank[0] => ['gold' => CurrentMedalAction::handle($sport, $rank[0], 'gold') + 1],
+                $rank[1] => ['silver' => CurrentMedalAction::handle($sport, $rank[1], 'silver') + 1],
+                $rank[2] => ['bronze' => CurrentMedalAction::handle($sport, $rank[2], 'bronze') + 1],
             ]);
         }
 
