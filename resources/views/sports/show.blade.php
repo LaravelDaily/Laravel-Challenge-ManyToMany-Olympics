@@ -5,49 +5,30 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Results</div>
-
+                    <div class="card-header">Top {{ $countries->count() }} Results</div>
                     <div class="card-body">
                         <table class="table table-striped">
                             <thead>
-                                <tr>
-                                    <th scope="col">Country</th>
-                                    <th scope="col">Gold</th>
-                                    <th scope="col">Silver</th>
-                                    <th scope="col">Bronze</th>
-                                </tr>
+                            <tr>
+                                <th scope="col">Country</th>
+                                @foreach ($places as $place)
+                                    <th scope="col">{{ Str::ucfirst($place['type']) }}</th>
+                                @endforeach
+                            </tr>
                             </thead>
                             <tbody>
+                            @forelse ($countries as $country)
                                 <tr>
-                                    <th>United States of America</th>
-                                    <td>39</td>
-                                    <td>41</td>
-                                    <td>33</td>
+                                    <th>{{ $country->name }}</th>
+                                    @foreach ($places as $place)
+                                        <td>{{ $country->{$place['type'].'_count'} }}</td>
+                                    @endforeach
                                 </tr>
+                            @empty
                                 <tr>
-                                    <th>France</th>
-                                    <td>10</td>
-                                    <td>12</td>
-                                    <td>14</td>
+                                    <td colspan="15" class="text-center">No data found</td>
                                 </tr>
-                                <tr>
-                                    <th>Germany</th>
-                                    <td>10</td>
-                                    <td>11</td>
-                                    <td>16</td>
-                                </tr>
-                                <tr>
-                                    <th>Poland</th>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr>
-                                    <th>Norway</th>
-                                    <td>4</td>
-                                    <td>2</td>
-                                    <td>2</td>
-                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>

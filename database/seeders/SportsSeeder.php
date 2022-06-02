@@ -16,20 +16,20 @@ class SportsSeeder extends Seeder
     {
         $sports = [
             [
-                'name' => 'Basketball'
+                'name' => 'Basketball',
             ],
             [
-                'name' => 'Weightlifting'
+                'name' => 'Weightlifting',
             ],
             [
-                'name' => 'Tennis'
+                'name' => 'Tennis',
             ],
             [
-                'name' => 'Swimming'
+                'name' => 'Swimming',
             ],
             [
-                'name' => 'Rowing'
-            ]
+                'name' => 'Rowing',
+            ],
         ];
 
         Sport::insert($sports);
