@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sport;
-use App\Models\Country;
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ScoreCountryRequest;
+use App\Models\Country;
+use App\Models\Sport;
+use Illuminate\Support\Facades\DB;
 
 class SportsController extends Controller
 {

@@ -24,6 +24,7 @@ class ScoreCountryRequest extends FormRequest
     public function rules()
     {
         $places = places();
+
         return [
             'score' => ['required', 'array'],
             'score.*' => ['required', 'array'],

@@ -37,6 +37,7 @@ class Country extends Model
                 },
             ]);
         }
+
         return $query;
     }
 
@@ -46,6 +47,7 @@ class Country extends Model
         foreach ($places as $place) {
             $query->orderBy($place['type'] . '_count', $direction);
         }
+
         return $query;
     }
 
@@ -55,6 +57,7 @@ class Country extends Model
         foreach ($places as $place) {
             $query->orHaving($place['type'] . '_count', $operator, $value);
         }
+
         return $query;
     }
 }

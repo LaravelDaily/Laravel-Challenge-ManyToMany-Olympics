@@ -1,20 +1,20 @@
 <?php
 
-if (!function_exists('places')) {
+if (! function_exists('places')) {
     function places()
     {
         return [
             [
                 'type' => 'gold',
-                'position' => '1st'
+                'position' => '1st',
             ],
             [
                 'type' => 'silver',
-                'position' => '2nd'
+                'position' => '2nd',
             ],
             [
                 'type' => 'bronze',
-                'position' => '3rd'
+                'position' => '3rd',
             ],
         ];
     }
