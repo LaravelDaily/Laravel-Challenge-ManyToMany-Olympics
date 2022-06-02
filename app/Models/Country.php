@@ -29,7 +29,7 @@ class Country extends Model
 
     public function scopeWithCountPlace($query)
     {
-        $places = get_places();
+        $places = places();
         foreach ($places as $index => $place) {
             $query->withCount([
                 'sports as ' . $place['type'] . '_count' => function ($query) use ($index) {
@@ -42,7 +42,7 @@ class Country extends Model
 
     public function scopeOrderByCountPlace($query, $direction = 'Desc')
     {
-        $places = get_places();
+        $places = places();
         foreach ($places as $place) {
             $query->orderBy($place['type'] . '_count', $direction);
         }
@@ -51,9 +51,9 @@ class Country extends Model
 
     public function scopeHavingCountPlace($query, $operator = '<>', $value = 0)
     {
-        $places = get_places();
+        $places = places();
         foreach ($places as $place) {
-            $query->orhaving($place['type'] . '_count', $operator, $value);
+            $query->orHaving($place['type'] . '_count', $operator, $value);
         }
         return $query;
     }

@@ -1,7 +1,7 @@
 <?php
 
-if (!function_exists('get_places')) {
-    function get_places()
+if (!function_exists('places')) {
+    function places()
     {
         return [
             [

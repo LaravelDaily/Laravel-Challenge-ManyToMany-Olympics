@@ -23,7 +23,7 @@ class ScoreCountryRequest extends FormRequest
      */
     public function rules()
     {
-        $places = get_places();
+        $places = places();
         return [
             'score' => ['required', 'array'],
             'score.*' => ['required', 'array'],
@@ -31,6 +31,7 @@ class ScoreCountryRequest extends FormRequest
             'score.*.*.country_id' => ['required', 'exists:countries,id'], // TODO: I want use the `distinct` but don't know how ignore the data in less array
         ];
     }
+    
     public function messages()
     {
         return [
