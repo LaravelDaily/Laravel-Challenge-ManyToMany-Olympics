@@ -15,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\SportsController::class, 'create'])->name('create');
-Route::post('/sports', [App\Http\Controllers\SportsController::class, 'store'])->name('store');
-Route::get('/sports', [App\Http\Controllers\SportsController::class, 'show'])->name('show');
+Route::get('/', [App\Http\Controllers\SportsController::class, 'create'])->name('sports.create');
+Route::post('/sports', [App\Http\Controllers\SportsController::class, 'store'])->name('sports.store');
+Route::get('/sports', [App\Http\Controllers\SportsController::class, 'show'])->name('sports.show');

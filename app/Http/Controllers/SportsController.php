@@ -2,31 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SportCreateRequest;
 use App\Models\Sport;
 use App\Models\Country;
-use Illuminate\Http\Request;
 
 class SportsController extends Controller
 {
-    public function create()
-    {
-        $sports = Sport::all();
-        $countries = Country::all();
+  public function create()
+  {
+    $sports = Sport::all();
+    $countries = Country::all();
 
-        return view('sports.create', compact('sports', 'countries'));
+    return view('sports.create', compact('sports', 'countries'));
+  }
+
+  public function store(SportCreateRequest $request)
+  {
+    foreach ($request->input('sports') as $sportId => $data) {
+      $sport = Sport::findOrFail($sportId);
+      foreach ($data as $medal => $countryId) {
+        $sport->countries()->attach($countryId, [
+          'medal' => $medal
+        ]);
+      }
     }
 
-    public function store(Request $request)
-    {
-        // Add your code here
+    return redirect()->route('sports.show');
+  }
 
-        return redirect()->route('show');
-    }
+  public function show()
+  {
+    $countries = Country::with('sports')->mostRewarded()->get();
 
-    public function show()
-    {
-        // Add your code here
-
-        return view('sports.show');
-    }
+    return view('sports.show', compact('countries'));
+  }
 }
