@@ -43,7 +43,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('show') }}">Results table</a>
+                            <a class="nav-link" href="{{ route('sports.show') }}">Results table</a>
                         </li>
                     </ul>
                 </div>
