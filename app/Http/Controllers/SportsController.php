@@ -21,11 +21,22 @@ class SportsController extends Controller
         $data = $request->except('_token');
         $sports = Sport::all();
 
-        foreach ($sports as $sport) {
+        # First solution
+        /* foreach ($sports as $sport) {
             $values = $data[$sport->id];
             foreach ($values as $medal => $countryID) {
                 $sport->countries()->attach($countryID, ['medal' => $medal]);
             }
+        } */
+
+        # Second solution
+        foreach ($sports as $sport) {
+            $values = collect($data[$sport->id]);
+            $values = $values->mapWithKeys(function ($countryID, $medal) {
+                return [$countryID => ['medal' => $medal]];
+            });
+
+            $sport->countries()->attach($values);
         }
 
         return redirect()->route('show');
