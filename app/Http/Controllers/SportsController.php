@@ -34,9 +34,9 @@ class SportsController extends Controller
     public function show()
     {
         $countries = Country::whereHas('sports')->withCount([
-            'sports as gold_count' => fn ($query) => $query->where('country_sports.medal', 'gold'),
-            'sports as silver_count' => fn ($query) => $query->where('country_sports.medal', 'silver'),
-            'sports as bronze_count' => fn ($query) => $query->where('country_sports.medal', 'bronze'),
+            'sports as gold_count' => fn ($query) => $query->where('country_sport.medal', 'gold'),
+            'sports as silver_count' => fn ($query) => $query->where('country_sport.medal', 'silver'),
+            'sports as bronze_count' => fn ($query) => $query->where('country_sport.medal', 'bronze'),
         ])
             ->orderByDesc('gold_count')
             ->orderByDesc('silver_count')

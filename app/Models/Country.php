@@ -13,6 +13,6 @@ class Country extends Model
 
     public function sports()
     {
-        return $this->belongsToMany(Sport::class, 'country_sports')->withPivot('medal');
+        return $this->belongsToMany(Sport::class, 'country_sport')->withPivot('medal');
     }
 }

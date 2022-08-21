@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCountrySportsTable extends Migration
+class CreateCountrySportTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCountrySportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('country_sports', function (Blueprint $table) {
+        Schema::create('country_sport', function (Blueprint $table) {
             $table->foreignId('country_id')->constrained()->cascadeOnDelete();
             $table->foreignId('sport_id')->constrained()->cascadeOnDelete();
             $table->enum('medal', ['gold', 'silver', 'bronze']);
@@ -27,6 +27,6 @@ class CreateCountrySportsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('country_sports');
+        Schema::dropIfExists('country_sport');
     }
 }
