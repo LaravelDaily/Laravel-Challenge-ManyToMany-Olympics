@@ -3,13 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSportResultRequest;
-use App\Models\Sport;
 use App\Models\Country;
+use App\Models\Sport;
 use App\Services\SportResultService;
 use Illuminate\Http\RedirectResponse;
 
 class SportsController extends Controller
 {
+    public $sportResultService;
+
+    public function __construct(SportResultService $sportResultService)
+    {
+        $this->sportResultService = $sportResultService;
+    }
+
     public function create()
     {
         $sports = Sport::all();
@@ -18,13 +25,13 @@ class SportsController extends Controller
         return view('sports.create', compact('sports', 'countries'));
     }
 
-    public function store(SportResultService $sportResultService, StoreSportResultRequest $request): RedirectResponse
+    public function store(StoreSportResultRequest $request): RedirectResponse
     {
         foreach ($request->validated()['sports'] as $sportId => $results) {
-            $sport = $sportResultService->getSportById($sportId);
+            $sport = $this->sportResultService->getSportById($sportId);
 
             foreach ($results as $medalType => $countryId) {
-                $sportResultService->applySportResult($sport, $countryId, $medalType);
+                $this->sportResultService->applySportResult($sport, $countryId, $medalType);
             }
         }
 
@@ -33,8 +40,8 @@ class SportsController extends Controller
 
     public function show()
     {
-        // Add your code here
+        $countries = $this->sportResultService->getCountriesWithSportResults();
 
-        return view('sports.show');
+        return view('sports.show', compact('countries'));
     }
 }
