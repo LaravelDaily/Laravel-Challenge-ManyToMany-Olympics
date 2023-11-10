@@ -1,3 +1,4 @@
+@php use App\Enums\Medal; @endphp
 @extends('layouts.app')
 
 @section('content')
@@ -16,14 +17,19 @@
                                     <label for="first" class="col-md-4 col-form-label text-md-right">1st place:</label>
 
                                     <div class="col-md-6">
-                                        <select name="first" id="first"
-                                                class="form-control @error('first') is-invalid @enderror">
-                                            <option>-- choose country --</option>
+                                        <select name="sports[{{$sport->id}}][{{Medal::GOLD}}]" id="first"
+                                                class="form-control @error('sports.'.$sport->id.'.'.Medal::GOLD) is-invalid @enderror">
+                                            <option value="">-- choose country --</option>
                                             @foreach ($countries as $country)
-                                                <option value="{{ $country->short_code }}">{{ $country->name }}</option>
+                                                <option
+                                                        value="{{ $country->id }}"
+                                                        @if(old('sports.'.$sport->id.'.'.Medal::GOLD) == $country->id) selected @endif
+                                                >
+                                                    {{ $country->name }}
+                                                </option>
                                             @endforeach
                                         </select>
-                                        @error('first')
+                                        @error('sports.'.$sport->id.'.'.Medal::GOLD)
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -35,14 +41,19 @@
                                     <label for="second" class="col-md-4 col-form-label text-md-right">2nd place:</label>
 
                                     <div class="col-md-6">
-                                        <select name="second" id="second"
-                                                class="form-control @error('second') is-invalid @enderror">
-                                            <option>-- choose country --</option>
+                                        <select name="sports[{{$sport->id}}][{{Medal::SILVER}}]" id="second"
+                                                class="form-control @error('sports.'.$sport->id.'.'.Medal::SILVER) is-invalid @enderror">
+                                            <option value="">-- choose country --</option>
                                             @foreach ($countries as $country)
-                                                <option value="{{ $country->short_code }}">{{ $country->name }}</option>
+                                                <option
+                                                        value="{{ $country->id }}"
+                                                        @if(old('sports.'.$sport->id.'.'.Medal::SILVER) == $country->id) selected @endif
+                                                >
+                                                    {{ $country->name }}
+                                                </option>
                                             @endforeach
                                         </select>
-                                        @error('second')
+                                        @error('sports.'.$sport->id.'.'.Medal::SILVER)
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -54,14 +65,19 @@
                                     <label for="third" class="col-md-4 col-form-label text-md-right">3rd place:</label>
 
                                     <div class="col-md-6">
-                                        <select name="third" id="third"
-                                                class="form-control @error('third') is-invalid @enderror">
-                                            <option>-- choose country --</option>
+                                        <select name="sports[{{$sport->id}}][{{Medal::BRONZE}}]" id="third"
+                                                class="form-control @error('sports.'.$sport->id.'.'.Medal::BRONZE) is-invalid @enderror">
+                                            <option value="">-- choose country --</option>
                                             @foreach ($countries as $country)
-                                                <option value="{{ $country->short_code }}">{{ $country->name }}</option>
+                                                <option
+                                                        value="{{ $country->id }}"
+                                                        @if(old('sports.'.$sport->id.'.'.Medal::BRONZE) == $country->id) selected @endif
+                                                >
+                                                    {{ $country->name }}
+                                                </option>
                                             @endforeach
                                         </select>
-                                        @error('third')
+                                        @error('sports.'.$sport->id.'.'.Medal::BRONZE)
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

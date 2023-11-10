@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSportResultRequest;
 use App\Models\Sport;
 use App\Models\Country;
-use Illuminate\Http\Request;
+use App\Services\SportResultService;
+use Illuminate\Http\RedirectResponse;
 
 class SportsController extends Controller
 {
@@ -16,9 +18,15 @@ class SportsController extends Controller
         return view('sports.create', compact('sports', 'countries'));
     }
 
-    public function store(Request $request)
+    public function store(SportResultService $sportResultService, StoreSportResultRequest $request): RedirectResponse
     {
-        // Add your code here
+        foreach ($request->validated()['sports'] as $sportId => $results) {
+            $sport = $sportResultService->getSportById($sportId);
+
+            foreach ($results as $medalType => $countryId) {
+                $sportResultService->applySportResult($sport, $countryId, $medalType);
+            }
+        }
 
         return redirect()->route('show');
     }
