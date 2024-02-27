@@ -18,36 +18,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ( $results as $result)
                                 <tr>
-                                    <th>United States of America</th>
-                                    <td>39</td>
-                                    <td>41</td>
-                                    <td>33</td>
+                                    <th>{{$result->name}}</th>
+                                    <td>{{$result->gold}}</td>
+                                    <td>{{$result->silver}}</td>
+                                    <td>{{$result->bronze}}</td>
                                 </tr>
-                                <tr>
-                                    <th>France</th>
-                                    <td>10</td>
-                                    <td>12</td>
-                                    <td>14</td>
-                                </tr>
-                                <tr>
-                                    <th>Germany</th>
-                                    <td>10</td>
-                                    <td>11</td>
-                                    <td>16</td>
-                                </tr>
-                                <tr>
-                                    <th>Poland</th>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr>
-                                    <th>Norway</th>
-                                    <td>4</td>
-                                    <td>2</td>
-                                    <td>2</td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
